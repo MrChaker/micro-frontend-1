@@ -4,7 +4,10 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 const deps = require("./package.json").dependencies;
 module.exports = (_, argv) => ({
     output: {
-        publicPath: argv.mode == "development" ? "http://localhost:8000/" : "",
+        publicPath:
+            argv.mode == "development"
+                ? "http://localhost:8000/"
+                : "https://micro-frontend-1.vercel.app/",
     },
 
     resolve: {
@@ -43,7 +46,9 @@ module.exports = (_, argv) => ({
         new ModuleFederationPlugin({
             name: "cms",
             filename: "remoteEntry.js",
-            remotes: {},
+            remotes: {
+                canva: "canva@https://micro-frontend-2.vercel.app/remoteEntry.js",
+            },
             exposes: {},
             shared: {
                 ...deps,

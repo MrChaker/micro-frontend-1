@@ -47,7 +47,14 @@ module.exports = (_, argv) => ({
             name: "cms",
             filename: "remoteEntry.js",
             remotes: {
-                canva: "canva@https://micro-frontend-2.vercel.app/remoteEntry.js",
+                /* canva:
+                    argv.mode == "development"
+                        ? "Canva@http://localhost:3000/remoteEntry.js"
+                        : "Canva@https://micro-frontend-2.vercel.app/remoteEntry.js", */
+                store:
+                    argv.mode == "development"
+                        ? "Store@http://localhost:3000/remoteEntry.js"
+                        : "Store@https://micro-frontend-2.vercel.app/remoteEntry.js",
             },
             exposes: {},
             shared: {
